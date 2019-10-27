@@ -17,7 +17,7 @@ class CreateStudentsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('mssv');
-            $table->timestamp('DateOfBirth');
+            $table->integer('DateOfBirth')->nullable();;
             $table->string('class');
             $table->integer('course');
             $table->bigInteger('idInstitute')->unsigned();
