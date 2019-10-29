@@ -11,15 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('app');
-});
+Route::get('/', 'HomeController@home')->middleware('authentication');
 
-Route::get('home', function() {
-	return view('home');
-});
+Route::get('home', 'HomeController@home')->middleware('authentication');
 
-Route::get('login', 'StudentController@getLogin')->name('getLogin');
-Route::post('login', ['as' => 'login', 'uses' => 'StudentController@postLogin']);
+Route::get('login', 'UserController@getLogin');
+Route::post('login', 'UserController@postLogin');
 
-// Route::post('login',['as' => 'login', 'uses' => 'StudentController@postLogin']);
+Route::get('logout','UserController@logout');

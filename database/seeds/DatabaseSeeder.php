@@ -11,11 +11,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(InstitutesTableSeeder::class);
-        $this->call(StudentsTableSeeder::class);
-        $this->call(SubjectTableSeeder::class);
-        $this->call(SubjectStudentsTableSeeder::class);
-        $this->call(UsersTableSeeder::class);
+//        $this->call(InstitutesTableSeeder::class);
+//        $this->call(StudentsTableSeeder::class);
+//        $this->call(SubjectTableSeeder::class);
+//        $this->call(SubjectStudentsTableSeeder::class);
+//        $this->call(UsersTableSeeder::class);
     }
 }
 
@@ -238,7 +238,6 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-            array('mssv' => '20158342', 'password' => bcrypt('20158342')),
             array('mssv' => '20161234', 'password' => bcrypt('20161234')),
             array('mssv' => '20172122', 'password' => bcrypt('20172122')),
             array('mssv' => '20183254', 'password' => bcrypt('20183254')),
