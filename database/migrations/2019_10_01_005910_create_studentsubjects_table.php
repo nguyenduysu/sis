@@ -20,8 +20,8 @@ class CreateStudentsubjectsTable extends Migration
             $table->float('scoreMid');
             $table->float('scoreFinal');
             $table->boolean('status');
-            $table->foreign('idStudent')->references('id')->on('students');
-            $table->foreign('idSubject')->references('id')->on('subjects');
+            // $table->foreign('idStudent')->references('id')->on('students');
+            // $table->foreign('idSubject')->references('id')->on('subjects');
             $table->timestamps();
         });
     }
