@@ -1,3 +1,3 @@
 <footer class="footer">
-    <img src="image/footer.png" alt="">
+    <img class="img-footer" src="image/footer.png" alt="">
 </footer>

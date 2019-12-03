@@ -97,3 +97,25 @@
     color: #fff;
     background: red;
 }
+.next {
+    background: #5aec98;
+}
+.chuaHoc {
+    background: yellow;
+}
+.footer .img-footer {
+    width: 100%;
+    position: relative;
+    bottom: 0;
+}
+
+
+li.note {
+    list-style-type: none;
+    font-size: 18px;
+    font-weight: bolder;
+}
+li.note.canhcao {
+    color: red;
+}
+

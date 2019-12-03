@@ -11,236 +11,475 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(InstitutesTableSeeder::class);
-        $this->call(StudentsTableSeeder::class);
-        $this->call(SubjectTableSeeder::class);
-        $this->call(SubjectStudentsTableSeeder::class);
-        $this->call(UsersTableSeeder::class);
+        $this->call(CTDTTableSeeder::class);
+        $this->call(LoaiHPTableSeeder::class);
+        $this->call(CTDT_LoaiHPTableSeeder::class);
+        $this->call(MonHocTableSeeder::class);
+        $this->call(SinhVienTableSeeder::class);
+        $this->call(KetQuaHocTapTableSeeder::class);
+        $this->call(UserTableSeeder::class);
     }
 }
 
-class SubjectTableSeeder extends Seeder
+class CTDTTableSeeder extends Seeder
+{
+    public function run()
+    {
+        DB::table('ctdt')->insert([
+            array('ten' => 'Công nghệ thông tin - ĐH La Trobe (Úc)')
+        ]);
+    }
+}
+
+class LoaiHPTableSeeder extends Seeder
+{
+    public function run()
+    {
+        DB::table('loai_hp')->insert([
+            array('ten' => 'Lý luận chính trị + Pháp luật đại cương', 'so_TC' => '12', 'Kieu_HP' => 'Chung'), // 1
+            array('ten' => 'Giáo dục thể chất', 'so_TC' => '5', 'Kieu_HP' => 'Chung'),                        // 2
+            array('ten' => 'Giáo dục Quốc phòng + An ninh', 'so_TC' => '0', 'Kieu_HP' => 'Chung'),             // 3
+            array('ten' => 'Tiếng Anh', 'so_TC' => '6', 'Kieu_HP' => 'Chung'),                                // 4
+            array('ten' => 'Khối kiến thức Toán và Khoa học cơ bản', 'so_TC' => '32', 'Kieu_HP' => 'Chung'),  // 5
+            array('ten' => 'Cơ sở và cốt lõi ngành', 'so_TC' => '48', 'Kieu_HP' => 'Rieng'),                  // 6
+            array('ten' => 'Kiến thức bổ trợ', 'so_TC' => '9', 'Kieu_HP' => 'Chung'),                         // 7
+            array('ten' => 'Chuyên ngành bắt buộc', 'so_TC' => '9', 'Kieu_HP' => 'Rieng'),                    // 8
+            array('ten' => 'Tự chọn', 'so_TC' => '16', 'Kieu_HP' => 'Rieng'),                                 // 9
+            array('ten' => 'Thực tập kĩ thuật', 'so_TC' => '2', 'Kieu_HP' => 'Rieng'),                        // 10
+            array('ten' => 'Đồ án tốt nghiệp kĩ sư', 'so_TC' => '12', 'Kieu_HP' => 'Rieng'),                  // 11
+
+        ]);
+    }
+}
+
+class CTDT_LoaiHPTableSeeder extends Seeder
+{
+    public function run()
+    {
+        DB::table('ctdt_loaihp')->insert([
+//            array('CTDT_id' => '1', 'LoaiHP_id' => '1'),
+//            array('CTDT_id' => '1', 'LoaiHP_id' => '2'),
+//            array('CTDT_id' => '1', 'LoaiHP_id' => '3'),
+//            array('CTDT_id' => '1', 'LoaiHP_id' => '4'),
+//            array('CTDT_id' => '1', 'LoaiHP_id' => '5'),
+            array('CTDT_id' => '1', 'LoaiHP_id' => '6'),
+//            array('CTDT_id' => '1', 'LoaiHP_id' => '7'),
+            array('CTDT_id' => '1', 'LoaiHP_id' => '8'),
+            array('CTDT_id' => '1', 'LoaiHP_id' => '9'),
+            array('CTDT_id' => '1', 'LoaiHP_id' => '10'),
+            array('CTDT_id' => '1', 'LoaiHP_id' => '11'),
+
+        ]);
+    }
+}
+
+class MonHocTableSeeder extends Seeder
 {
 	public function run()
 	{
-		DB::table('subjects')->insert([
+		DB::table('monhoc')->insert([
             // kì 1
-			array('name' => 'Quản trị học đại cương', 'tc' => '2', 'semester' => '1', 'idInstitute' => '1','time_table' => '{"key":"5","value":[5,6]}'),
-            array('name' => 'Tin học đại cương', 'tc' => '4', 'semester' => '1', 'idInstitute' => '1','time_table' => '{"key":"6","value":[2,3,4,5,6]}'),
-            array('name' => 'Giải tích 1', 'tc' => '4', 'semester' => '1', 'idInstitute' => '1','time_table' => '{"key":"3","value":[2,3,4,5,6]}'),
-            array('name' => 'Đại số', 'tc' => '4', 'semester' => '1', 'idInstitute' => '1','time_table' => '{"key":"4","value":[2,3,4,5,6]}'),
-            array('name' => 'Vật lý 1', 'tc' => '3', 'semester' => '1', 'idInstitute' => '1','time_table' => '{"key":"2","value":[7,8,9]}'),
-            array('name' => 'Những nguyên lý cơ bản chủ nghĩa Mac-Lenin', 'tc' => '2', 'semester' => '1', 'idInstitute' => '1','time_table' => '{"key":"5","value":[2,3,4]}'),
-            array('name' => 'Tiếng anh B1.1', 'tc' => '3', 'semester' => '1', 'idInstitute' => '1','time_table' => '{"key":"6","value":[7,8,9,10]}'),
-            array('name' => 'Quân sự chung - bắn súng AK', 'tc' => '2', 'semester' => '1', 'idInstitute' => '1','time_table' => '{"key":"2","value":[10,11,12]}'),
-            array('name' => 'Giáo dục thể chất A', 'tc' => '2', 'semester' => '1', 'idInstitute' => '1','time_table' => '{"key":"5","value":[11,12]}'),
+			array('ten' => 'Quản trị học đại cương', 'tc' => '2', 'ky_hoc_chuan' => '1', 'LoaiHP_id' => '7'),
+            array('ten' => 'Tin học đại cương', 'tc' => '4', 'ky_hoc_chuan' => '1', 'LoaiHP_id' => '5'),
+            array('ten' => 'Giải tích 1', 'tc' => '4', 'ky_hoc_chuan' => '1', 'LoaiHP_id' => '5'),
+            array('ten' => 'Đại số', 'tc' => '4', 'ky_hoc_chuan' => '1', 'LoaiHP_id' => '5'),
+            array('ten' => 'Vật lý 1', 'tc' => '3', 'ky_hoc_chuan' => '1', 'LoaiHP_id' => '5'),
+            array('ten' => 'Những nguyên lý cơ bản chủ nghĩa Mac-Lenin I', 'tc' => '2', 'ky_hoc_chuan' => '1', 'LoaiHP_id' => '1'),
+            array('ten' => 'Tiếng anh B1.1', 'tc' => '3', 'ky_hoc_chuan' => '1', 'LoaiHP_id' => '4'),
+            array('ten' => 'Quân sự chung - bắn súng AK', 'tc' => '0', 'ky_hoc_chuan' => '1', 'LoaiHP_id' => '3'),
+            array('ten' => 'Giáo dục thể chất A', 'tc' => '1', 'ky_hoc_chuan' => '1', 'LoaiHP_id' => '2'),
 
             // kì 2
-             array('name' => 'Giải tích 2', 'tc' => '3', 'semester' => '2', 'idInstitute' => '1','time_table' => '{"key":"3","value":[10,11,12]}'),
-             array('name' => 'Giải tích 3', 'tc' => '3', 'semester' => '2', 'idInstitute' => '1','time_table' => '{"key":"3","value":[4,5,6]}'),
-             array('name' => 'Đường lối quân sự của Đảng', 'tc' => '2', 'semester' => '2', 'idInstitute' => '1','time_table' => '{"key":"3","value":[7,8,9]}'),
-             array('name' => 'Xác xuất thống kê', 'tc' => '3', 'semester' => '2', 'idInstitute' => '1','time_table' => '{"key":"5","value":[7,8,9,10]}'),
-             array('name' => 'Vật lý 2', 'tc' => '3', 'semester' => '2', 'idInstitute' => '1','time_table' => '{"key":"6","value":[7,8,9]}'),
-             array('name' => 'Những nguyên lý cơ bản chủ nghĩa Mac-Lenin 2', 'tc' => '3', 'semester' => '2', 'idInstitute' => '1','time_table' => '{"key":"2","value":[10,11,12]}'),
-             array('name' => 'Tiếng anh B1.2', 'tc' => '3', 'semester' => '2', 'idInstitute' => '1','time_table' => '{"key":"4","value":[3,4,5,6]}'),
-             array('name' => 'Giáo dục thể chất B', 'tc' => '2', 'semester' => '2', 'idInstitute' => '1','time_table' => '{"key":"4","value":[11,12]}'),
+             array('ten' => 'Giải tích 2', 'tc' => '3', 'ky_hoc_chuan' => '2', 'LoaiHP_id' => '5'),
+             array('ten' => 'Giải tích 3', 'tc' => '3', 'ky_hoc_chuan' => '2', 'LoaiHP_id' => '5'),
+             array('ten' => 'Đường lối quân sự của Đảng', 'tc' => '0', 'ky_hoc_chuan' => '2', 'LoaiHP_id' => '3'),
+             array('ten' => 'Xác xuất thống kê', 'tc' => '3', 'ky_hoc_chuan' => '2', 'LoaiHP_id' => '5'),
+             array('ten' => 'Vật lý 2', 'tc' => '3', 'ky_hoc_chuan' => '2', 'LoaiHP_id' => '5'),
+             array('ten' => 'Những nguyên lý cơ bản chủ nghĩa Mac-Lenin II', 'tc' => '3', 'ky_hoc_chuan' => '2', 'LoaiHP_id' => '1'),
+             array('ten' => 'Tiếng anh B1.2', 'tc' => '3', 'ky_hoc_chuan' => '2', 'LoaiHP_id' => '4'),
+             array('ten' => 'Giáo dục thể chất B', 'tc' => '1', 'ky_hoc_chuan' => '2', 'LoaiHP_id' => '2'),
 
             // ki 3
-             array('name' => 'Nhập môn công nghệ thông tin và truyền thông', 'tc' => '3', 'semester' => '3', 'idInstitute' => '1','time_table' => '{"key":"3","value":[3,4,5,6]}'),
-             array('name' => 'Nhập môn java', 'tc' => '3', 'semester' => '3', 'idInstitute' => '1','time_table' => '{"key":"3","value":[7,8,9]}'),
-             array('name' => 'Vật lý 3', 'tc' => '3', 'semester' => '3', 'idInstitute' => '1','time_table' => '{"key":"6","value":[10,11,12]}'),
-             array('name' => 'Tư tưởng Hồ Chí Minh', 'tc' => '2', 'semester' => '3', 'idInstitute' => '1','time_table' => '{"key":"5","value":[9,10,11,12]}'),
-             array('name' => 'Giáo dục thể chất C', 'tc' => '1', 'semester' => '3', 'idInstitute' => '1','time_table' => '{"key":"4","value":[11,12]}'),
-             array('name' => 'Công tác quốc phòng an ninh', 'tc' => '2', 'semester' => '3', 'idInstitute' => '1','time_table' => '{"key":"6","value":[4,5,6]}'),
+             array('ten' => 'Nhập môn công nghệ thông tin và truyền thông', 'tc' => '3', 'ky_hoc_chuan' => '3', 'LoaiHP_id' => '6'),
+             array('ten' => 'Nhập môn java', 'tc' => '3', 'ky_hoc_chuan' => '3', 'LoaiHP_id' => '6'),
+             array('ten' => 'Vật lý 3', 'tc' => '3', 'ky_hoc_chuan' => '3', 'LoaiHP_id' => '5'),
+             array('ten' => 'Tư tưởng Hồ Chí Minh', 'tc' => '2', 'ky_hoc_chuan' => '3', 'LoaiHP_id' => '1'),
+             array('ten' => 'Giáo dục thể chất C', 'tc' => '1', 'ky_hoc_chuan' => '3', 'LoaiHP_id' => '2'),
+             array('ten' => 'Công tác quốc phòng an ninh', 'tc' => '0', 'ky_hoc_chuan' => '3', 'LoaiHP_id' => '3'),
 
             // kì 4
-             array('name' => 'Đường lối của Đảng cộng sản Việt Nam', 'tc' => '3', 'semester' => '4', 'idInstitute' => '1','time_table' => '{"key":"2","value":[4,5,6]}'),
-             array('name' => 'Cấu trúc dữ liệu và giải thuật', 'tc' => '3', 'semester' => '4', 'idInstitute' => '1','time_table' => '{"key":"3","value":[3,4,5,6]}'),
-             array('name' => 'Kiến trúc máy tính', 'tc' => '3', 'semester' => '4', 'idInstitute' => '1','time_table' => '{"key":"4","value":[3,4,5,6]}'),
-             array('name' => 'Java nâng cao', 'tc' => '3', 'semester' => '4', 'idInstitute' => '1','time_table' => '{"key":"5","value":[3,4,5,6]}'),
-             array('name' => 'Toán rời rạc', 'tc' => '3', 'semester' => '4', 'idInstitute' => '1','time_table' => '{"key":"6","value":[3,4,5,6]}'),
-             array('name' => 'Kĩ thuật lập trình', 'tc' => '2', 'semester' => '4', 'idInstitute' => '1','time_table' => '{"key":"2","value":[7,8,9]}'),
-             array('name' => 'Giáo dục thể chất D', 'tc' => '2', 'semester' => '4', 'idInstitute' => '1','time_table' => '{"key":"6","value":[11,12]}'),
-                    
+             array('ten' => 'Đường lối Cách Mạng của Đảng cộng sản Việt Nam', 'tc' => '3', 'ky_hoc_chuan' => '4', 'LoaiHP_id' => '1'),
+             array('ten' => 'Cấu trúc dữ liệu và giải thuật', 'tc' => '3', 'ky_hoc_chuan' => '4', 'LoaiHP_id' => '6'),
+             array('ten' => 'Kiến trúc máy tính', 'tc' => '3', 'ky_hoc_chuan' => '4', 'LoaiHP_id' => '6'),
+             array('ten' => 'Java nâng cao', 'tc' => '3', 'ky_hoc_chuan' => '4', 'LoaiHP_id' => '6'),
+             array('ten' => 'Toán rời rạc', 'tc' => '3', 'ky_hoc_chuan' => '4', 'LoaiHP_id' => '6'),
+             array('ten' => 'Kĩ thuật lập trình', 'tc' => '2', 'ky_hoc_chuan' => '4', 'LoaiHP_id' => '6'),
+             array('ten' => 'Giáo dục thể chất D', 'tc' => '1', 'ky_hoc_chuan' => '4', 'LoaiHP_id' => '2'),
+
             // kì 5
-             array('name' => 'Lập trình hướng đối tượng', 'tc' => '2', 'semester' => '5', 'idInstitute' => '1','time_table' => '{"key":"2","value":[10,11,12]}'),
-             array('name' => 'Hệ điều hành', 'tc' => '3', 'semester' => '5', 'idInstitute' => '1','time_table' => '{"key":"5","value":[3,4,5,6]}'),
-             array('name' => 'Linux và phần mềm mã nguồn mở', 'tc' => '2', 'semester' => '5', 'idInstitute' => '1','time_table' => '{"key":"5","value":[7,8,9]}'),
-             array('name' => 'Mạng máy tính', 'tc' => '3', 'semester' => '5', 'idInstitute' => '1','time_table' => '{"key":"6","value":[1,2,3]}'),
-             array('name' => 'Trí tuệ nhân tạo', 'tc' => '3', 'semester' => '5', 'idInstitute' => '1','time_table' => '{"key":"2","value":[1,2,3,4]}'),
-             array('name' => 'Cơ sở dữ liệu', 'tc' => '3', 'semester' => '5', 'idInstitute' => '1','time_table' => '{"key":"3","value":[3,4,5,6]}'),
-             array('name' => 'Pháp luật đại cương', 'tc' => '2', 'semester' => '5', 'idInstitute' => '1','time_table' => '{"key":"2","value":[5,6]}'),
-             array('name' => 'Nhập môn công nghệ phần mềm', 'tc' => '2', 'semester' => '5', 'idInstitute' => '1','time_table' => '{"key":"4","value":[1,2,3]}'),
-             array('name' => 'Giáo dục thể chất E', 'tc' => '1', 'semester' => '5', 'idInstitute' => '1','time_table' => '{"key":"6","value":[11,12]}'),
+             array('ten' => 'Lập trình hướng đối tượng', 'tc' => '2', 'ky_hoc_chuan' => '5', 'LoaiHP_id' => '6'),
+             array('ten' => 'Hệ điều hành', 'tc' => '3', 'ky_hoc_chuan' => '5', 'LoaiHP_id' => '6'),
+             array('ten' => 'Linux và phần mềm mã nguồn mở', 'tc' => '2', 'ky_hoc_chuan' => '5', 'LoaiHP_id' => '6'),
+             array('ten' => 'Mạng máy tính', 'tc' => '3', 'ky_hoc_chuan' => '5', 'LoaiHP_id' => '6'),
+             array('ten' => 'Trí tuệ nhân tạo', 'tc' => '3', 'ky_hoc_chuan' => '5', 'LoaiHP_id' => '6'),
+             array('ten' => 'Cơ sở dữ liệu', 'tc' => '3', 'ky_hoc_chuan' => '5', 'LoaiHP_id' => '6'),
+             array('ten' => 'Pháp luật đại cương', 'tc' => '2', 'ky_hoc_chuan' => '5', 'LoaiHP_id' => '1'),
+             array('ten' => 'Nhập môn công nghệ phần mềm', 'tc' => '2', 'ky_hoc_chuan' => '5', 'LoaiHP_id' => '6'),
+             array('ten' => 'Giáo dục thể chất E', 'tc' => '1', 'ky_hoc_chuan' => '5', 'LoaiHP_id' => '2'),
 
             // kì 6
-             array('name' => 'Xử lý tín hiệu số', 'tc' => '2', 'semester' => '6', 'idInstitute' => '1','time_table' => '{"key":"2","value":[1,2,3]}'),
-             array('name' => 'Lý thuyết thông tin', 'tc' => '2', 'semester' => '6', 'idInstitute' => '1','time_table' => '{"key":"3","value":[4,5,6]}'),
-             array('name' => 'Phương pháp thiết kế hệ thống thông tin', 'tc' => '2', 'semester' => '6', 'idInstitute' => '1','time_table' => '{"key":"4","value":[1,2,3]}'),
-             array('name' => 'Lập trình mạng', 'tc' => '2', 'semester' => '6', 'idInstitute' => '1','time_table' => '{"key":"4","value":[4,5,6]}'),
-             array('name' => 'An toàn và bảo mật thông tin', 'tc' => '3', 'semester' => '6', 'idInstitute' => '1','time_table' => '{"key":"6","value":[3,4,5,6]}'),
-             array('name' => 'Thực tập kĩ thuật', 'tc' => '2', 'semester' => '6', 'idInstitute' => '1','time_table' => '{"key":","value":[]}'),
+             array('ten' => 'Xử lý tín hiệu số', 'tc' => '2', 'ky_hoc_chuan' => '6', 'LoaiHP_id' => '8'),
+             array('ten' => 'Lý thuyết thông tin', 'tc' => '2', 'ky_hoc_chuan' => '6', 'LoaiHP_id' => '8'),
+             array('ten' => 'Phân tích và thiết kế hệ thống thông tin', 'tc' => '2', 'ky_hoc_chuan' => '6', 'LoaiHP_id' => '6'),
+             array('ten' => 'Lập trình mạng', 'tc' => '2', 'ky_hoc_chuan' => '6', 'LoaiHP_id' => '8'),
+             array('ten' => 'An toàn và bảo mật thông tin', 'tc' => '3', 'ky_hoc_chuan' => '6', 'LoaiHP_id' => '6'),
+             array('ten' => 'Thực tập kĩ thuật', 'tc' => '2', 'ky_hoc_chuan' => '6', 'LoaiHP_id' => '10'),
 
             // kì 7
-             array('name' => 'Project 1', 'tc' => '3', 'semester' => '7', 'idInstitute' => '1','time_table' => '{"key":"0","value":[]}'),
-             array('name' => 'Ngôn ngữ và phương pháp dịch', 'tc' => '2', 'semester' => '7', 'idInstitute' => '1','time_table' => '{"key":"6","value":[9,10,11]}'),
-             array('name' => 'Thiết kế và quản trị cơ sở dữ liệu', 'tc' => '3', 'semester' => '7', 'idInstitute' => '1','time_table' => '{"key":"6","value":[3,4,5,6]}'),
-             array('name' => 'Đồ họa và hiện thực ảo', 'tc' => '3', 'semester' => '7', 'idInstitute' => '1','time_table' => '{"key":"2","value":[7,8,9]}'),
-             array('name' => 'An ninh mạng', 'tc' => '2', 'semester' => '7', 'idInstitute' => '1','time_table' => '{"key":"3","value":[4,5,6]}'),
-             array('name' => 'Lập trình thiết bị di động', 'tc' => '2', 'semester' => '7', 'idInstitute' => '1','time_table' => '{"key":"6","value":[7,8]}'),
-             array('name' => 'Đa phương tiện', 'tc' => '2', 'semester' => '7', 'idInstitute' => '1','time_table' => '{"key":"5","value":[10,11,12]}'),
+             array('ten' => 'Project 1', 'tc' => '3', 'ky_hoc_chuan' => '7', 'LoaiHP_id' => '6'),
+             array('ten' => 'Ngôn ngữ và phương pháp dịch', 'tc' => '2', 'ky_hoc_chuan' => '7', 'LoaiHP_id' => '8'),
+             array('ten' => 'Thiết kế và quản trị cơ sở dữ liệu', 'tc' => '3', 'ky_hoc_chuan' => '7', 'LoaiHP_id' => '8'),
+             array('ten' => 'Đồ họa và hiện thực ảo', 'tc' => '3', 'ky_hoc_chuan' => '7', 'LoaiHP_id' => '8'),
+             array('ten' => 'An ninh mạng', 'tc' => '2', 'ky_hoc_chuan' => '7', 'LoaiHP_id' => '9'),
+             array('ten' => 'Lập trình thiết bị di động', 'tc' => '2', 'ky_hoc_chuan' => '7', 'LoaiHP_id' => '9'),
+             array('ten' => 'Đa phương tiện', 'tc' => '2', 'ky_hoc_chuan' => '7', 'LoaiHP_id' => '9'),
 
             // kì 8
-             array('name' => 'Thiết kế và xây dựng phần mềm', 'tc' => '3', 'semester' => '8', 'idInstitute' => '1','time_table' => '{"key":"3","value":[1,2,3,4]}'),
-             array('name' => 'Hệ phân tán', 'tc' => '2', 'semester' => '8', 'idInstitute' => '1','time_table' => '{"key":"5","value":[4,5,6]}'),
-             array('name' => 'Tính toán khoa học', 'tc' => '3', 'semester' => '8', 'idInstitute' => '1','time_table' => '{"key":"4","value":[7,8,9]}'),
-             array('name' => 'Quản trị mạng', 'tc' => '2', 'semester' => '8', 'idInstitute' => '1','time_table' => '{"key":"6","value":[1,2,3]}'),
-             array('name' => 'Lập trình .Net', 'tc' => '2', 'semester' => '8', 'idInstitute' => '1','time_table' => '{"key":"4","value":[4,5]}'),
-             array('name' => 'Lập trình song song', 'tc' => '2', 'semester' => '8', 'idInstitute' => '1','time_table' => '{"key":"5","value":[1,2,3]}'),
-             array('name' => 'Project 2', 'tc' => '3', 'semester' => '8', 'idInstitute' => '1','time_table' => '{"key":"0","value":[]}'),
+             array('ten' => 'Thiết kế và xây dựng phần mềm', 'tc' => '3', 'ky_hoc_chuan' => '8', 'LoaiHP_id' => '9'),
+             array('ten' => 'Hệ phân tán', 'tc' => '2', 'ky_hoc_chuan' => '8', 'LoaiHP_id' => '8'),
+             array('ten' => 'Tính toán khoa học', 'tc' => '3', 'ky_hoc_chuan' => '8', 'LoaiHP_id' => '8'),
+             array('ten' => 'Quản trị mạng', 'tc' => '2', 'ky_hoc_chuan' => '8', 'LoaiHP_id' => '9'),
+             array('ten' => 'Lập trình .Net', 'tc' => '2', 'ky_hoc_chuan' => '8', 'LoaiHP_id' => '9'),
+             array('ten' => 'Lập trình song song', 'tc' => '2', 'ky_hoc_chuan' => '8', 'LoaiHP_id' => '9'),
+             array('ten' => 'Project 2', 'tc' => '3', 'ky_hoc_chuan' => '8', 'LoaiHP_id' => '6'),
 
             // kì 9
-             array('name' => 'Tương tác người máy', 'tc' => '3', 'semester' => '9', 'idInstitute' => '1','time_table' => '{"key":"2","value":[1,2,3,4]}'),
-             array('name' => 'Xử lý ảnh', 'tc' => '2', 'semester' => '9', 'idInstitute' => '1','time_table' => '{"key":"3","value":[1,2,3]}'),
-             array('name' => 'Thiết kế mạng Intranet', 'tc' => '2', 'semester' => '9', 'idInstitute' => '1','time_table' => '{"key":"3","value":[4,5,6]}'),
-             array('name' => 'Hệ trợ giúp quyết định', 'tc' => '2', 'semester' => '9', 'idInstitute' => '1','time_table' => '{"key":"4","value":[1,2,3]}'),
-             array('name' => 'Quản trị dự án công nghệ thông tin', 'tc' => '2', 'semester' => '9', 'idInstitute' => '1','time_table' => '{"key":"4","value":[4,5,6]}'),
-             array('name' => 'Phát triển phần mềm phân tán', 'tc' => '3', 'semester' => '9', 'idInstitute' => '1','time_table' => '{"key":"5","value":[3,4,5,6]}'),
-             array('name' => 'Project 3', 'tc' => '3', 'semester' => '9', 'idInstitute' => '1','time_table' => '{"key":"0","value":[]}')
+             array('ten' => 'Tương tác người máy', 'tc' => '3', 'ky_hoc_chuan' => '9', 'LoaiHP_id' => '8'),
+             array('ten' => 'Xử lý ảnh', 'tc' => '2', 'ky_hoc_chuan' => '9', 'LoaiHP_id' => '9'),
+             array('ten' => 'Thiết kế mạng Intranet', 'tc' => '2', 'ky_hoc_chuan' => '9', 'LoaiHP_id' => '8'),
+             array('ten' => 'Hệ trợ giúp quyết định', 'tc' => '2', 'ky_hoc_chuan' => '9', 'LoaiHP_id' => '9'),
+             array('ten' => 'Quản trị dự án công nghệ thông tin', 'tc' => '2', 'ky_hoc_chuan' => '9', 'LoaiHP_id' => '9'),
+             array('ten' => 'Phát triển phần mềm phân tán', 'tc' => '3', 'ky_hoc_chuan' => '9', 'LoaiHP_id' => '9'),
+             array('ten' => 'Project 3', 'tc' => '3', 'ky_hoc_chuan' => '9', 'LoaiHP_id' => '8'),
 
             // kì 10
-		]);
+            array('ten' => 'Hệ cơ sở dữ liệu đa phương tiện', 'tc' => '3', 'ky_hoc_chuan' => '10', 'LoaiHP_id' => '9'),
+            array('ten' => 'Kinh tế công nghệ phần mềm', 'tc' => '2', 'ky_hoc_chuan' => '10', 'LoaiHP_id' => '9'),
+            array('ten' => 'Đồ án tốt nghiệp kỹ sư', 'tc' => '12', 'ky_hoc_chuan' => '10', 'LoaiHP_id' => '11'),
+        ]);
 	}
 }
 
-class SubjectStudentsTableSeeder extends Seeder
+class SinhVienTableSeeder extends Seeder
 {
     public function run()
     {
-        DB::table('studentsubjects')->insert([
+        // trang_thai = 0: đang học tập
+        // trang_thai = 1: đang bảo lưu
+        // trang_thai = 2: buộc thôi học
+        DB::table('sv')->insert([
+            array('ten' => 'Nguyen Van A', 'mssv' => '20150001', 'CTDT_id' => '1', 'Muc_canh_cao' => '2', 'trang_thai' => '0'),
+            array('ten' => 'Nguyen Van B', 'mssv' => '20150002', 'CTDT_id' => '1', 'Muc_canh_cao' => '0', 'trang_thai' => '0'),
+            array('ten' => 'Nguyen Van C', 'mssv' => '20160001', 'CTDT_id' => '1', 'Muc_canh_cao' => '0', 'trang_thai' => '0'),
+            array('ten' => 'Nguyen Van D', 'mssv' => '20170001', 'CTDT_id' => '1', 'Muc_canh_cao' => '0', 'trang_thai' => '0'),
+            array('ten' => 'Nguyen Van E', 'mssv' => '20180001', 'CTDT_id' => '1', 'Muc_canh_cao' => '0', 'trang_thai' => '0'),
+            array('ten' => 'Nguyen Van F', 'mssv' => '20190001', 'CTDT_id' => '1', 'Muc_canh_cao' => '0', 'trang_thai' => '0'),
+        ]);
+    }
+}
+
+class KetQuaHocTapTableSeeder extends Seeder
+{
+    public function run()
+    {
+        DB::table('kq_ht')->insert([
+            // trang_thai = 0 : mon hoc chua qua
+            // trang_thai = 1: mon hoc da qua
+
             // ki 1
-            array('idStudent' => '1', 'idSubject' => '1', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
-            array('idStudent' => '1', 'idSubject' => '2', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
-            array('idStudent' => '1', 'idSubject' => '3', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
-            array('idStudent' => '1', 'idSubject' => '4', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
-            array('idStudent' => '1', 'idSubject' => '5', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
-            array('idStudent' => '1', 'idSubject' => '6', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
-            array('idStudent' => '1', 'idSubject' => '7', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
-            array('idStudent' => '1', 'idSubject' => '8', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
-            array('idStudent' => '1', 'idSubject' => '9', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
+            array('Diem_QT' => '2', 'Diem_CK' => '2', 'SV_id' => '1', 'MH_id' => '1', 'trang_thai' => '0'),
+            array('Diem_QT' => '2', 'Diem_CK' => '2', 'SV_id' => '1', 'MH_id' => '2', 'trang_thai' => '0'),
+            array('Diem_QT' => '2', 'Diem_CK' => '2', 'SV_id' => '1', 'MH_id' => '3', 'trang_thai' => '0'),
+            array('Diem_QT' => '2', 'Diem_CK' => '2', 'SV_id' => '1', 'MH_id' => '4', 'trang_thai' => '0'),
+            array('Diem_QT' => '2', 'Diem_CK' => '2', 'SV_id' => '1', 'MH_id' => '5', 'trang_thai' => '0'),
+            array('Diem_QT' => '2', 'Diem_CK' => '2', 'SV_id' => '1', 'MH_id' => '6', 'trang_thai' => '0'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '1', 'MH_id' => '7', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '1', 'MH_id' => '8', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '1', 'MH_id' => '9', 'trang_thai' => '1'),
 
             // ki 2
-            array('idStudent' => '1', 'idSubject' => '10', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
-            array('idStudent' => '1', 'idSubject' => '11', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
-            array('idStudent' => '1', 'idSubject' => '12', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
-            array('idStudent' => '1', 'idSubject' => '13', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
-            array('idStudent' => '1', 'idSubject' => '14', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
-            array('idStudent' => '1', 'idSubject' => '15', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
-            array('idStudent' => '1', 'idSubject' => '16', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
-            array('idStudent' => '1', 'idSubject' => '17', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
-            array('idStudent' => '1', 'idSubject' => '18', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '1', 'MH_id' => '10', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '1', 'MH_id' => '11', 'trang_thai' => '1'),
+            array('Diem_QT' => '2', 'Diem_CK' => '2', 'SV_id' => '1', 'MH_id' => '12', 'trang_thai' => '0'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '1', 'MH_id' => '13', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '1', 'MH_id' => '14', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '1', 'MH_id' => '15', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '1', 'MH_id' => '16', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '1', 'MH_id' => '17', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '1', 'MH_id' => '18', 'trang_thai' => '1'),
 
             // ki 3
-            array('idStudent' => '1', 'idSubject' => '19', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
-            array('idStudent' => '1', 'idSubject' => '20', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
-            array('idStudent' => '1', 'idSubject' => '21', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
-            array('idStudent' => '1', 'idSubject' => '22', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
-            array('idStudent' => '1', 'idSubject' => '23', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
-            array('idStudent' => '1', 'idSubject' => '24', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '1', 'MH_id' => '19', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '1', 'MH_id' => '20', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '1', 'MH_id' => '21', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '1', 'MH_id' => '22', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '1', 'MH_id' => '23', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '1', 'MH_id' => '24', 'trang_thai' => '1'),
 
-            // ki 4
-            array('idStudent' => '1', 'idSubject' => '25', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
-            array('idStudent' => '1', 'idSubject' => '26', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
-            array('idStudent' => '1', 'idSubject' => '27', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
-            array('idStudent' => '1', 'idSubject' => '28', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
-            array('idStudent' => '1', 'idSubject' => '29', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
-            array('idStudent' => '1', 'idSubject' => '30', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
-            array('idStudent' => '1', 'idSubject' => '31', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
-            
-            // ki 5
-            array('idStudent' => '1', 'idSubject' => '32', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
-            array('idStudent' => '1', 'idSubject' => '33', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
-            array('idStudent' => '1', 'idSubject' => '34', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
-            array('idStudent' => '1', 'idSubject' => '35', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
-            array('idStudent' => '1', 'idSubject' => '36', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
-            array('idStudent' => '1', 'idSubject' => '37', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
-            array('idStudent' => '1', 'idSubject' => '38', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
-            array('idStudent' => '1', 'idSubject' => '39', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
-            array('idStudent' => '1', 'idSubject' => '40', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
+            // kì 4
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '1', 'MH_id' => '25', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '1', 'MH_id' => '26', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '1', 'MH_id' => '27', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '1', 'MH_id' => '28', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '1', 'MH_id' => '29', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '1', 'MH_id' => '30', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '1', 'MH_id' => '31', 'trang_thai' => '1'),
 
-            // ki 6
-            array('idStudent' => '1', 'idSubject' => '41', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
-            array('idStudent' => '1', 'idSubject' => '42', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
-            array('idStudent' => '1', 'idSubject' => '43', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
-            array('idStudent' => '1', 'idSubject' => '44', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
-            array('idStudent' => '1', 'idSubject' => '45', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
-            array('idStudent' => '1', 'idSubject' => '46', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
-            array('idStudent' => '1', 'idSubject' => '47', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
-            
-            // ki 7
-            array('idStudent' => '1', 'idSubject' => '48', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
-            array('idStudent' => '1', 'idSubject' => '49', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
-            array('idStudent' => '1', 'idSubject' => '50', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
-            array('idStudent' => '1', 'idSubject' => '51', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
-            array('idStudent' => '1', 'idSubject' => '52', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
-            array('idStudent' => '1', 'idSubject' => '53', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
-            array('idStudent' => '1', 'idSubject' => '54', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
-            
-            // ki 8
-            array('idStudent' => '1', 'idSubject' => '55', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
-            array('idStudent' => '1', 'idSubject' => '56', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
-            array('idStudent' => '1', 'idSubject' => '57', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
-            array('idStudent' => '1', 'idSubject' => '58', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
-            array('idStudent' => '1', 'idSubject' => '59', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
-            array('idStudent' => '1', 'idSubject' => '60', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
-            array('idStudent' => '1', 'idSubject' => '61', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
-            
-            // ki 9
-            array('idStudent' => '1', 'idSubject' => '62', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
-            array('idStudent' => '1', 'idSubject' => '63', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
-            array('idStudent' => '1', 'idSubject' => '64', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
-            array('idStudent' => '1', 'idSubject' => '65', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
-            array('idStudent' => '1', 'idSubject' => '66', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
-            array('idStudent' => '1', 'idSubject' => '67', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
-            array('idStudent' => '1', 'idSubject' => '68', 'scoreMid' => '8', 'scoreFinal' => '8', 'status' => '1'),
+            // kì 5
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '1', 'MH_id' => '32', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '1', 'MH_id' => '33', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '1', 'MH_id' => '34', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '1', 'MH_id' => '35', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '1', 'MH_id' => '36', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '1', 'MH_id' => '37', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '1', 'MH_id' => '38', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '1', 'MH_id' => '39', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '1', 'MH_id' => '40', 'trang_thai' => '1'),
+
+            // kì 6
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '1', 'MH_id' => '41', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '1', 'MH_id' => '42', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '1', 'MH_id' => '43', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '1', 'MH_id' => '44', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '1', 'MH_id' => '45', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '1', 'MH_id' => '46', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '1', 'MH_id' => '47', 'trang_thai' => '1'),
+
+            // kì 7
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '1', 'MH_id' => '48', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '1', 'MH_id' => '49', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '1', 'MH_id' => '50', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '1', 'MH_id' => '51', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '1', 'MH_id' => '52', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '1', 'MH_id' => '53', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '1', 'MH_id' => '54', 'trang_thai' => '1'),
+
+            // kì 8
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '1', 'MH_id' => '55', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '1', 'MH_id' => '56', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '1', 'MH_id' => '57', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '1', 'MH_id' => '58', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '1', 'MH_id' => '59', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '1', 'MH_id' => '60', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '1', 'MH_id' => '61', 'trang_thai' => '1'),
+
+            // kì 9
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '1', 'MH_id' => '62', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '1', 'MH_id' => '63', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '1', 'MH_id' => '64', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '1', 'MH_id' => '65', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '1', 'MH_id' => '66', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '1', 'MH_id' => '68', 'trang_thai' => '1'),
+
+            // ki 1
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '1', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '2', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '3', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '4', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '5', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '6', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '7', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '8', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '9', 'trang_thai' => '1'),
+
+            // ki 2
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '10', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '11', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '12', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '13', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '14', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '15', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '16', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '17', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '18', 'trang_thai' => '1'),
+
+            // ki 3
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '19', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '20', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '21', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '22', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '23', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '24', 'trang_thai' => '1'),
+
+            // kì 4
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '25', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '26', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '27', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '28', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '29', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '30', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '31', 'trang_thai' => '1'),
+
+            // kì 5
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '32', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '33', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '34', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '35', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '36', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '37', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '38', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '39', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '40', 'trang_thai' => '1'),
+
+            // kì 6
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '41', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '42', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '43', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '44', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '45', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '46', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '47', 'trang_thai' => '1'),
+
+            // kì 7
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '48', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '49', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '50', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '51', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '52', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '53', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '54', 'trang_thai' => '1'),
+
+            // kì 8
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '55', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '56', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '57', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '58', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '59', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '60', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '61', 'trang_thai' => '1'),
+
+            // kì 9
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '62', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '63', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '64', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '65', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '66', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '2', 'MH_id' => '68', 'trang_thai' => '1'),
+
+            // ki 1
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '3', 'MH_id' => '1', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '3', 'MH_id' => '2', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '3', 'MH_id' => '3', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '3', 'MH_id' => '4', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '3', 'MH_id' => '5', 'trang_thai' => '1'),
+            array('Diem_QT' => '2', 'Diem_CK' => '2', 'SV_id' => '3', 'MH_id' => '6', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '3', 'MH_id' => '7', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '3', 'MH_id' => '8', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '3', 'MH_id' => '9', 'trang_thai' => '1'),
+
+            // ki 2
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '3', 'MH_id' => '10', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '3', 'MH_id' => '11', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '3', 'MH_id' => '12', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '3', 'MH_id' => '13', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '3', 'MH_id' => '14', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '3', 'MH_id' => '15', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '3', 'MH_id' => '16', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '3', 'MH_id' => '17', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '3', 'MH_id' => '18', 'trang_thai' => '1'),
+
+            // ki 3
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '3', 'MH_id' => '19', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '3', 'MH_id' => '20', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '3', 'MH_id' => '21', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '3', 'MH_id' => '22', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '3', 'MH_id' => '23', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '3', 'MH_id' => '24', 'trang_thai' => '1'),
+
+            // kì 4
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '3', 'MH_id' => '25', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '3', 'MH_id' => '26', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '3', 'MH_id' => '27', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '3', 'MH_id' => '28', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '3', 'MH_id' => '29', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '3', 'MH_id' => '30', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '3', 'MH_id' => '31', 'trang_thai' => '1'),
+
+            // kì 5
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '3', 'MH_id' => '32', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '3', 'MH_id' => '33', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '3', 'MH_id' => '34', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '3', 'MH_id' => '35', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '3', 'MH_id' => '36', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '3', 'MH_id' => '37', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '3', 'MH_id' => '38', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '3', 'MH_id' => '39', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '3', 'MH_id' => '40', 'trang_thai' => '1'),
+
+            // kì 6
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '3', 'MH_id' => '41', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '3', 'MH_id' => '42', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '3', 'MH_id' => '43', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '3', 'MH_id' => '44', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '3', 'MH_id' => '45', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '3', 'MH_id' => '46', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '3', 'MH_id' => '47', 'trang_thai' => '1'),
+
+            // kì 7
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '3', 'MH_id' => '48', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '3', 'MH_id' => '49', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '3', 'MH_id' => '50', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '3', 'MH_id' => '51', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '3', 'MH_id' => '52', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '3', 'MH_id' => '53', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '3', 'MH_id' => '54', 'trang_thai' => '1'),
+
+            // kì 8
+//            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '3', 'MH_id' => '55', 'trang_thai' => '1'),
+//            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '3', 'MH_id' => '56', 'trang_thai' => '1'),
+//            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '3', 'MH_id' => '57', 'trang_thai' => '1'),
+//            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '3', 'MH_id' => '58', 'trang_thai' => '1'),
+//            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '3', 'MH_id' => '59', 'trang_thai' => '1'),
+//            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '3', 'MH_id' => '60', 'trang_thai' => '1'),
+//            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '3', 'MH_id' => '61', 'trang_thai' => '1'),
+
+            // 2018
+            // kì 1
+            array('Diem_QT' => '2', 'Diem_CK' => '2', 'SV_id' => '5', 'MH_id' => '1', 'trang_thai' => '0'),
+            array('Diem_QT' => '2', 'Diem_CK' => '2', 'SV_id' => '5', 'MH_id' => '2', 'trang_thai' => '0'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '5', 'MH_id' => '3', 'trang_thai' => '1'),
+//            array('Diem_QT' => '2', 'Diem_CK' => '2', 'SV_id' => '5', 'MH_id' => '4', 'trang_thai' => '0'),
+//            array('Diem_QT' => '2', 'Diem_CK' => '2', 'SV_id' => '5', 'MH_id' => '5', 'trang_thai' => '0'),
+            array('Diem_QT' => '2', 'Diem_CK' => '2', 'SV_id' => '5', 'MH_id' => '6', 'trang_thai' => '0'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '5', 'MH_id' => '7', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '5', 'MH_id' => '8', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '5', 'MH_id' => '9', 'trang_thai' => '1'),
+
+            // ki 2
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '5', 'MH_id' => '10', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '5', 'MH_id' => '11', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '5', 'MH_id' => '12', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '5', 'MH_id' => '13', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '5', 'MH_id' => '14', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '5', 'MH_id' => '15', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '5', 'MH_id' => '16', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '5', 'MH_id' => '17', 'trang_thai' => '1'),
+            array('Diem_QT' => '8', 'Diem_CK' => '8', 'SV_id' => '5', 'MH_id' => '18', 'trang_thai' => '1'),
         ]);
     }
 }
 
-class StudentsTableSeeder extends Seeder
-{
-    public function run()
-    {
-        DB::table('students')->insert([
-            array('name' => 'Nguyen Duy Su', 'mssv' => '20158342', 'DateOfBirth' => '0', 'class' => 'LTU14', 'course' => '60', 'idInstitute' => '1'),
-            array('name' => 'Nguyen Van A', 'mssv' => '20161234', 'DateOfBirth' => '0', 'class' => 'LTU15', 'course' => '61', 'idInstitute' => '1'),
-            array('name' => 'Tran Van B', 'mssv' => '20172122', 'DateOfBirth' => '0', 'class' => 'LTU16', 'course' => '62', 'idInstitute' => '1'),
-            array('name' => 'Huynh Van C', 'mssv' => '20183254', 'DateOfBirth' => '0', 'class' => 'LTU17', 'course' => '63', 'idInstitute' => '1'),
-            array('name' => 'Do Van D', 'mssv' => '20192121', 'DateOfBirth' => '0', 'class' => 'LTU18', 'course' => '64', 'idInstitute' => '1'),
-        ]);
-    }
-}
-
-class InstitutesTableSeeder extends Seeder
-{
-    public function run()
-    {
-        DB::table('institutes')->insert([
-            array('name' => 'Viện công nghệ thông tin và truyền thông')
-        ]);
-    }
-}
-
-class UsersTableSeeder extends Seeder
+class UserTableSeeder extends Seeder
 {
     public function run()
     {
         DB::table('users')->insert([
-            array('mssv' => '20158342', 'password' => bcrypt('20158342')),
-            array('mssv' => '20161234', 'password' => bcrypt('20161234')),
-            array('mssv' => '20172122', 'password' => bcrypt('20172122')),
-            array('mssv' => '20183254', 'password' => bcrypt('20183254')),
-            array('mssv' => '20192121', 'password' => bcrypt('20192121')),
+            array('username' => '20150001', 'password' => '$2y$10$W4PZt5vIE3ou9L4yKSF2WOHIKZUJURed5iDSli.TnRc9/MVx/MrhC'),
+            array('username' => '20150002', 'password' => '$2y$10$EEsLal.EDVzY3NZqD2eu.OLH5/h8p7uTMZNbG2W8LNALNqUOJ42lm'),
+            array('username' => '20160001', 'password' => '$2y$10$2TS9qc9jpcilCT4EoLPECeRVb0q9rz5V.eGwkUWjJMJKZpondgWB6'),
+            array('username' => '20170001', 'password' => '$2y$10$JxIVvcl7.P.Mh1cqDW.rauQL0BjAIGjCwP6nuKrM560LAVBI/Ohue'),
+            array('username' => '20180001', 'password' => '$2y$10$0vc6fIr65socsvSXM0LNLOCqpJP3Ph84iAsdTKtc6qqKJIUObDf8q'),
+            array('username' => '20190001', 'password' => '$2y$10$JR6ODKKtvEM1YII4GBL1ueDBPsIRV4sQ8IT.dyyop7nhTt6kGthOW'),
         ]);
     }
 }

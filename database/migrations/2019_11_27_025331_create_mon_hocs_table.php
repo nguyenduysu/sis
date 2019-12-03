@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSubjectsTable extends Migration
+class CreateMonHocsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class CreateSubjectsTable extends Migration
      */
     public function up()
     {
-        Schema::create('subjects', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('name');
+        Schema::create('MonHoc', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('ten');
             $table->integer('tc');
-            $table->integer('semester');
-            $table->bigInteger('idInstitute')->unsigned();
-            $table->foreign('idInstitute')->references('id')->on('institutes');
+            $table->integer('ky_hoc_chuan');
+            $table->integer('LoaiHP_id');
             $table->timestamps();
         });
     }
@@ -31,6 +30,6 @@ class CreateSubjectsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('subjects');
+        Schema::dropIfExists('MonHoc');
     }
 }

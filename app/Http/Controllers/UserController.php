@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Student;
+use App\SinhVien;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -33,15 +33,17 @@ class UserController extends Controller
         if ($validate->fails()) {
             return redirect()->back()->withErrors($validate->errors());
         }
-        if (Auth::attempt(['mssv' => $request->mssv, 'password' => $request->password])) {
-            $student = new Student();
 
-            $student = $student::where('mssv', $request->mssv)->first();
-            if (!$student) {
+        if (Auth::attempt(['username' => $request->mssv, 'password' => $request->password])) {
+            $sinhvien = new SinhVien();
+
+            $sinhvien = $sinhvien::where('mssv', $request->mssv)->first()->toArray();
+//            dd($sinhvien);
+            if (!$sinhvien) {
                 Auth::logout();
                 return redirect('login')->with('res', 'Tài khoản hoặc mật khẩu không đúng');
             } else {
-                $request->session()->put('user', $student);
+                $request->session()->put('user', $sinhvien);
 
                 return redirect('home');
             }
